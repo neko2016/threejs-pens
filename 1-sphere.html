@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <!-- <script src="three.js/build/three.min.js"></script> -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/87/three.min.js"></script>
+</head>
+<body>
+    <div id="container"></div>
+    <script type="text/javascript">
+    // Set the scene size.
+    const WIDTH = window.innerWidth;
+    const HEIGHT = window.innerHeight;
+
+    // Set some camera attributes
+    const VIEW_ANGLE = 45;
+    const ASPECT = WIDTH / HEIGHT;
+    const NEAR = 0.1;
+    const FAR = 10000;
+
+    const camera =
+        new THREE.PerspectiveCamera(
+            VIEW_ANGLE,
+            ASPECT,
+            NEAR,
+            FAR
+        );
+
+    // create scene and add camera
+    const scene = new THREE.Scene();
+    scene.add(camera);
+
+    // create and attach renderer to DOM
+    const renderer = new THREE.WebGLRenderer();
+    renderer.setSize(WIDTH, HEIGHT);
+    const container =document.querySelector('#container');
+    container.appendChild(renderer.domElement);
+
+    // create light & set position
+    const pointLight = new THREE.PointLight(0xFFFFFF);
+    pointLight.position.x = 10;
+    pointLight.position.y = 50;
+    pointLight.position.z = 130;
+    // add to the scene
+    scene.add(pointLight);
+
+    // // Set up the sphere vars
+    // const RADIUS = 50;
+    // const SEGMENTS = 16;
+    // const RINGS = 16;
+    // const sphereMaterial =
+    //   new THREE.MeshLambertMaterial(
+    //     {
+    //       color: 0xCC0000
+    //     });
+
+    // const sphere = new THREE.Mesh(
+    //   new THREE.SphereGeometry(
+    //     RADIUS,
+    //     SEGMENTS,
+    //     RINGS),
+    //   sphereMaterial);
+
+    // sphere.position.z = -300;
+    // scene.add(sphere);
+    
+    // Set up the sphere vars
+    const RADIUS = 30;
+    const SEGMENTS = 16;
+    const RINGS = 16;
+    const sphereMaterial =
+      new THREE.MeshLambertMaterial(
+        {
+          color: 0x4286f4
+        });
+
+    const sphere = new THREE.Mesh(
+      new THREE.SphereGeometry(
+        RADIUS,
+        SEGMENTS,
+        RINGS),
+      sphereMaterial);
+
+    sphere.position.z = -300;
+    sphere.position.x = 0;
+    sphere.position.y = 10;
+    scene.add(sphere);
+
+    // draw
+    renderer.render(scene, camera);
+
+    // function update () {
+    //   // Draw!
+    //   renderer.render(scene, camera);
+    //   // Schedule the next frame.
+    //   requestAnimationFrame(update);
+    // }
+
+    // requestAnimationFrame(update);
+
+    </script>
+</body>
+</html>
